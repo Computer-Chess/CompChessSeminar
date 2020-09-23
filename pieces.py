@@ -79,9 +79,13 @@ class King(Piece):
         table = np.flip(table, 0)
         
         for i, j in product((1,0), repeat=2):
-            table[startRow+i, startCol+j] = int(startRow+i in range(nRows) and startCol+j in range(nCols))
-            table[startRow-i, startCol+j] = int(startRow-i in range(nRows) and startCol+j in range(nCols))
-            table[startRow+i, startCol-j] = int(startRow+i in range(nRows) and startCol-j in range(nCols))
-            table[startRow-i, startCol-j] = int(startRow-i in range(nRows) and startCol-j in range(nCols))
+            if startRow+i in range(nRows) and startCol+j in range(nCols):
+                table[startRow+i, startCol+j] = 1
+            if startRow-i in range(nRows) and startCol+j in range(nCols):
+                table[startRow-i, startCol+j] = 1
+            if startRow+i in range(nRows) and startCol-j in range(nCols):
+                table[startRow+i, startCol-j] = 1
+            if startRow-i in range(nRows) and startCol-j in range(nCols):
+                table[startRow-i, startCol-j] = 1
         
         return np.flip(table, 0)
